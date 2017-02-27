@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">FontChooser</string>
+    <string name="sampleString">The quick brown fox jumps over the lazy dog</string>
+    <string name="red">Red</string>
+    <string name="green">Green</string>
+    <string name="blue">Blue</string>
+    <string name="chooseColor">Choose RGB values</string>
+    <string name="chooseTypeface">Choose text type face</string>
+    <string name="chooseSize">Choose text size</string>
+    <string name="chooseFontStyle">Choose Text Style</string>
+    <string name="small">Small</string>
+    <string name="large">Large</string>
+    <string-array name="typeStyleArray">
+        <item>Bold</item>
+        <item>Bold Italic</item>
+        <item>Italic</item>
+        <item>Normal</item>
+    </string-array>
+    <string-array name="typeFaceArray">
+        <item>Default</item>
+        <item>Bold Default</item>
+        <item>Monospace</item>
+        <item>Sans Serif</item>
+        <item>Serif</item>
+    </string-array>
+</resources>
