@@ -19,78 +19,6 @@
         android:layout_alignParentStart="true"
         android:textAppearance="@style/TextAppearance.AppCompat" />
 
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/blueSlider"
-        android:layout_below="@+id/greenLabel"
-        android:layout_alignEnd="@+id/greenSlider"
-        android:layout_toEndOf="@+id/greenLabel"
-        android:max="255"/>
-
-    <TextView
-        android:text="@string/chooseFontStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textStyle"
-        android:layout_marginStart="49dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/textTypeFace"
-        android:layout_alignBottom="@+id/textTypeFace"
-        android:layout_toEndOf="@+id/textTypeFace" />
-
-    <TextView
-        android:text="@string/blue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/blueLabel"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="14sp"
-        android:layout_above="@+id/textSize"
-        android:layout_marginBottom="15dp"
-        android:layout_alignParentStart="true" />
-
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textSizeBar"
-        android:layout_marginBottom="27dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/blueSlider"
-        android:layout_toStartOf="@+id/largeText"/>
-
-    <TextView
-        android:text="@string/chooseSize"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textSize"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="14sp"
-        android:layout_above="@+id/textSizeBar"
-        android:layout_alignParentStart="true" />
-
-    <Spinner
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/typeFaceDropdown"
-        android:layout_above="@+id/chooseColor"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="51dp"
-        android:layout_alignEnd="@+id/textTypeFace"
-        android:hapticFeedbackEnabled="true" />
-
-    <TextView
-        android:text="@string/chooseTypeface"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textTypeFace"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="14sp"
-        android:layout_above="@+id/typeFaceDropdown"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="19dp" />
-
     <TextView
         android:text="@string/small"
         android:layout_width="wrap_content"
@@ -110,38 +38,6 @@
         android:layout_alignTop="@+id/textSize"
         android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:text="@string/chooseColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/chooseColor"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="14sp"
-        android:layout_marginBottom="25dp"
-        android:layout_above="@+id/redLabel"
-        android:layout_alignParentStart="true" />
-
-    <SeekBar
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/greenSlider"
-        android:layout_alignBottom="@+id/greenLabel"
-        android:layout_alignEnd="@+id/redSlider"
-        android:layout_toEndOf="@+id/greenLabel"
-        android:max="255"/>
-
-    <TextView
-        android:text="@string/red"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/redLabel"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="14sp"
-        android:layout_marginBottom="15dp"
-        android:layout_above="@+id/greenSlider"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/blueLabel"/>
-
     <SeekBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -151,17 +47,6 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/smallText" />
 
-    <TextView
-        android:text="@string/green"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/greenLabel"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="14sp"
-        android:layout_marginBottom="19dp"
-        android:layout_above="@+id/blueLabel"
-        android:layout_alignParentStart="true" />
-
     <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -169,5 +54,126 @@
         android:layout_below="@+id/textTypeFace"
         android:layout_alignParentEnd="true"
         android:layout_alignStart="@+id/textStyle" />
+
+    <TextView
+        android:text="@string/chooseTypeface"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textTypeFace"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:layout_marginBottom="28dp"
+        android:layout_above="@+id/typeFaceDropdown"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/chooseColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chooseColor"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/typeFaceDropdown"
+        android:layout_marginBottom="38dp"
+        android:hapticFeedbackEnabled="true"
+        android:layout_above="@+id/chooseColor"
+        android:layout_alignParentStart="true"
+        android:layout_alignEnd="@+id/textTypeFace" />
+
+    <TextView
+        android:text="@string/red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/redLabel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:layout_below="@+id/chooseColor"
+        android:layout_alignParentStart="true" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/greenSlider"
+        android:max="255"
+        android:layout_below="@+id/redSlider"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="18dp"
+        android:layout_toEndOf="@+id/greenLabel" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/blueSlider"
+        android:max="255"
+        android:layout_below="@+id/greenSlider"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:layout_toEndOf="@+id/greenLabel" />
+
+    <TextView
+        android:text="@string/green"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/greenLabel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:layout_alignTop="@+id/greenSlider"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/blue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/blueLabel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/blueSlider" />
+
+    <TextView
+        android:text="@string/chooseSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textSize"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:layout_below="@+id/blueSlider"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textSizeBar"
+        android:layout_below="@+id/textSize"
+        android:layout_alignStart="@+id/blueSlider"
+        android:layout_toStartOf="@+id/largeText" />
+
+    <Button
+        android:text="@string/saveChanges"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="14dp"
+        android:onClick="saveChanges"/>
+
+    <TextView
+        android:text="@string/chooseFontStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textStyle"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textSize="14sp"
+        android:layout_alignBaseline="@+id/textTypeFace"
+        android:layout_alignBottom="@+id/textTypeFace"
+        android:layout_toStartOf="@+id/largeText" />
 
 </RelativeLayout>

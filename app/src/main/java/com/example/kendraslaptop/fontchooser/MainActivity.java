@@ -1,5 +1,6 @@
 package com.example.kendraslaptop.fontchooser;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
@@ -16,48 +17,92 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private SeekBar sizeBar, redBar, blueBar, greenBar;
     private Spinner typeFaceSpinner, textStyleSpinner;
-    private SeekBar size, redBar, blueBar, greenBar;
+
     private TextView sampleText;
+    private Intent incomingIntent;
+    private Intent outgoingIntent;
+
+    //Return information
+    private int size;
+    private int color_blue;
+    private int color_red;
+    private int color_green;
+    private int typeSytleId;
+    private String typeFaceId;
+
+    //keys
+    private static final String SIZE = "SIZE";
+    private static final String FONT_FACE = "FONT FACE";
+    private static final String FONT_STYLE = "FONT STYLE";
+    private static final String COLOR_RED = "COLOR RED";
+    private static final String COLOR_GREEN = "COLOR GREEN";
+    private static final String COLOR_BLUE = "COLOR BLUE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setIds();
+        setUpSeekBars();
+        setUpSpinners();
 
-        addItemsAndSetListenerOnFontStyle();
-
-        addListenerToSeekBars();
-
+        incomingIntent = getIntent();
+        outgoingIntent = new Intent();
     }
 
     private void setIds() {
         typeFaceSpinner  = (Spinner) findViewById(R.id.typeFaceDropdown);
         textStyleSpinner = (Spinner) findViewById(R.id.fontStyleDropDown);
-
-        size = (SeekBar) findViewById(R.id.textSizeBar);
+        sizeBar = (SeekBar) findViewById(R.id.textSizeBar);
         redBar = (SeekBar) findViewById(R.id.redSlider);
         blueBar = (SeekBar) findViewById(R.id.blueSlider);
         greenBar = (SeekBar) findViewById(R.id.greenSlider);
         sampleText = (TextView) findViewById(R.id.sampleString);
     }
 
-    private void addItemsAndSetListenerOnFontStyle() {
-        addItemsToSpinner(typeFaceSpinner, R.array.typeFaceArray);
-        addItemsToSpinner(textStyleSpinner, R.array.typeStyleArray);
 
-        addListenerOnSpinnerItemSelection(typeFaceSpinner);
-        addListenerOnSpinnerItemSelection(textStyleSpinner);
-    }
-    private void addListenerToSeekBars() {
-        addListenerOnSeekBar(size);
-        addListenerOnSeekBar(redBar);
-        addListenerOnSeekBar(blueBar);
-        addListenerOnSeekBar(greenBar);
+    private void setUpSeekBars() {
+        SeekBar[] seekBars = {sizeBar, redBar, blueBar, greenBar};
+       for(SeekBar bar : seekBars) {
+           addListenerOnSeekBar(bar);
+       }
     }
 
-    public void addItemsToSpinner(Spinner spinner, int array) {
+    public void addListenerOnSeekBar(SeekBar seekBar){
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
+
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(seekBar == sizeBar) {
+                    changeSize();
+                } else {
+                    changeColor();
+                }
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
+    private void setUpSpinners() {
+        Spinner[] spinners = {typeFaceSpinner, textStyleSpinner};
+        int[] arrays = {R.array.typeFaceArray, R.array.typeStyleArray};
+        for(int i =0; i < spinners.length && i < arrays.length; i++) {
+            addItemsToSpinner(spinners[i], arrays[i]);
+            addListenerOnSpinnerItemSelection(spinners[i]);
+        }
+    }
+
+    private void addItemsToSpinner(Spinner spinner, int array) {
         List<String> spinnerItems = new ArrayList<>();
 
         String selectedItem = String.valueOf(spinner.getSelectedItem());
@@ -73,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         spinner.setAdapter(dataAdapter);
     }
 
-    public void addListenerOnSpinnerItemSelection(Spinner spinner) {
+    private void addListenerOnSpinnerItemSelection(Spinner spinner) {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -90,80 +135,44 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void addListenerOnSeekBar(SeekBar seekBar){
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener(){
-
-
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(seekBar == size) {
-                    changeSize();
-                } else {
-                    changeColor();
-                }
-            }
-
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
-    }
-    public void changeSize() {
-        sampleText.setTextSize(size.getProgress());
-    }
-
-    public void changeColor() {
-        int blueProg = blueBar.getProgress();
-        int greenProg = greenBar.getProgress();
-        int redProg = redBar.getProgress();
-
-        sampleText.setTextColor(Color.rgb(redProg, greenProg,blueProg));
-    }
-
     public void changeFont() {
         String selectedStyle = textStyleSpinner.getSelectedItem().toString();
         String selectedType = typeFaceSpinner.getSelectedItem().toString();
 
+        FontType fontType = new FontType();
 
-        int style = getStyle(selectedStyle);
-        Typeface typeFace = getTypeFace(selectedType);
-        sampleText.setTypeface(typeFace, style);
+        typeSytleId = fontType.getStyle(selectedStyle);
+        typeFaceId = selectedType;//ontType.getTypeFace(selectedType);
+        sampleText.setTypeface(fontType.getTypeFace(typeFaceId), typeSytleId);
     }
 
-    public Typeface getTypeFace(String selectedType) {
-        if(selectedType  == null || selectedType.isEmpty()) {
-            return Typeface.DEFAULT;
-        } else if("Default".equals(selectedType)) {
-            return Typeface.DEFAULT;
-        } else if("Bold Default".equals(selectedType)) {
-            return Typeface.DEFAULT_BOLD;
-        } else if("Monospace".equals(selectedType)) {
-            return Typeface.MONOSPACE;
-        } else if("Sans Serif".equals(selectedType)) {
-            return Typeface.SANS_SERIF;
-        } else if("Serif".equals(selectedType)) {
-            return Typeface.SERIF;
-        } else {
-            return Typeface.DEFAULT;
-        }
+    public void changeSize() {
+        size = sizeBar.getProgress();
+        sampleText.setTextSize(size);
     }
 
-    public int getStyle(String selectedStyle) {
-        if(selectedStyle  == null || selectedStyle.isEmpty()) {
-            return Typeface.NORMAL;
-        } else if("Normal".equals(selectedStyle)) {
-            return Typeface.NORMAL;
-        } else if("Bold".equals(selectedStyle)) {
-            return Typeface.BOLD;
-        } else if("Italic".equals(selectedStyle)) {
-            return Typeface.ITALIC;
-        } else if("Bold Italic".equals(selectedStyle)) {
-            return Typeface.BOLD_ITALIC;
-        } else {
-            return Typeface.NORMAL;
-        }
+    public void changeColor() {
+        color_blue = blueBar.getProgress();
+        color_green = greenBar.getProgress();
+        color_red = redBar.getProgress();
+
+        sampleText.setTextColor(Color.rgb(color_red, color_green, color_blue));
     }
+
+    public void saveChanges(View view) {
+        finish();
+    }
+
+    @Override
+    public void finish() {
+        outgoingIntent.putExtra(SIZE, size);
+        outgoingIntent.putExtra(FONT_STYLE, typeSytleId);
+        outgoingIntent.putExtra(FONT_FACE, typeFaceId);
+        outgoingIntent.putExtra(COLOR_BLUE, color_blue);
+        outgoingIntent.putExtra(COLOR_GREEN, color_green);
+        outgoingIntent.putExtra(COLOR_RED, color_red);
+        setResult(RESULT_OK, outgoingIntent);
+        super.finish();
+    }
+
 }
